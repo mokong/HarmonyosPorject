@@ -5,7 +5,7 @@ export default struct PropPageBottom {
   @Link tasks: [Task]
   @Link count: number
 
-  update: () => void
+  update?: (() => void)
 
   @Styles card() {
     .backgroundColor(Color.White)
@@ -21,7 +21,7 @@ export default struct PropPageBottom {
     }
     .onClick(() => {
       this.tasks.splice(index, 1)
-      this.update()
+      this.update!()
     })
     .width(40)
     .height(40)
@@ -38,7 +38,7 @@ export default struct PropPageBottom {
         .onClick(() => {
           this.tasks.push(new Task(this.count))
           this.count++
-          this.update()
+          this.update!()
         })
         .width('80%')
         .height(56)
@@ -55,7 +55,7 @@ export default struct PropPageBottom {
                 .select(item.taskFinished)
                 .onChange((val) => {
                   item.taskFinished = val
-                  this.update()
+                  this.update!()
                 })
             }
             .card()
